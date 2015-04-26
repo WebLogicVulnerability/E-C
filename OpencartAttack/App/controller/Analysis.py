@@ -5,4 +5,4 @@ Created on Apr 26, 2015
 '''
 
 if __name__ == '__main__':
-    pass
+    print "hello_app"
