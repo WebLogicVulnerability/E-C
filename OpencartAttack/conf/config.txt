@@ -1,0 +1,4 @@
+price
+count
+id
+name
