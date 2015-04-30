@@ -8,9 +8,8 @@ import os
 import urllib 
 import urllib2
 import cookielib
-#python瀛楃涓蹭互鍙婃枃浠跺鐞�http://www.jb51.net/article/47956.htm锛沨
+import re
 
-#杩斿洖鎸囧畾閰嶇疆鏂囦欢鐨勫湴鍧�
 def post(url, data):  
     req = urllib2.Request(url)  
     data = urllib.urlencode(data)  
@@ -35,18 +34,21 @@ def add_to_cast():
     
 def geturl_param():
     file_object = open('addtocart.dot')
-    #璇诲彇url鍜屽搴斿弬鏁板苟瀛樺偍鍦ㄥ瓧鍏镐腑
-    url_param={}
-    s="label"
-    e="]"
+    #顺序不对
     for line in file_object:
-        m=line.find(s)
-        n=line.find(e)
-        if (m>0):
-            url=line[m+8:n-1]
-            param=line[n+6:-3]
-            url_param[url]=param
-    for item in url_param.items():print item
+        if (re.findall(r'label=\".*\"]',line).__str__()<>'[]'):
+            url=re.findall(r'label=\".*\"]',line).__str__()[10:-4] 
+#     url_param={}
+#     s="label"
+#     e="]"
+#     for line in file_object:
+#         m=line.find(s)
+#         n=line.find(e)
+#         if (m>0):
+#             url=line[m+8:n-1]
+#             param=line[n+6:-3]
+#             url_param[url]=param
+#     for item in url_param.items():print item
 
 if __name__ == '__main__':
     guide=getconfigRoute()
