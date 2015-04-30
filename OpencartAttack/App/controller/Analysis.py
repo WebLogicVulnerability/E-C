@@ -13,8 +13,6 @@ def getconfigRoute():
     route=currentRoute[:-4]+"\conf\config.txt"
     return route
 def geturl_param():
-
-
     file_object = open('addtocart.dot')
     #读取url和对应参数并存储在字典中
     url_param={}
