@@ -1,0 +1,14 @@
+POST /pls/wwwbks/bks_login2.login?jym2005=10393.536308655775 HTTP/1.1
+Host: jwxt.sdu.edu.cn:7890
+Proxy-Connection: keep-alive
+Content-Length: 29
+Cache-Control: max-age=0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Origin: http://jwxt.sdu.edu.cn:7890
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 UBrowser/4.0.4368.102 Safari/537.36
+Content-Type: application/x-www-form-urlencoded
+Referer: http://jwxt.sdu.edu.cn:7890/zhxt_bks/xk_login.html
+Accept-Encoding: gzip,deflate
+Accept-Language: zh-CN,zh;q=0.8
+
+stuid=201200301355&pwd=131531&price=100&account=12138
