@@ -9,8 +9,11 @@ import urllib
 import urllib2
 import cookielib
 import re
+url_list=[]
+param_list=[]
 
 def post(url, data):  
+    #http post方法
     req = urllib2.Request(url)  
     data = urllib.urlencode(data)  
     #enable cookie  
@@ -24,6 +27,7 @@ def getconfigRoute():
     return route
 
 def get_post_data(param_list_element):
+    #获得param_list中元素的值，存储在字典中并返回
     p=param_list_element
     data={}
     while(len(p)>1):
@@ -38,33 +42,37 @@ def get_post_data(param_list_element):
             name=tem[s1:e1]
             value=tem[e1+1:]
             data[name]=value
+            if(p.find("&")<0):#最后一个参数
+                e1=p.find("=")
+                s1=0
+                name=p[s1:e1]
+                value=p[e1+1:]
+                data[name]=value       
         else:
             break
     return data
-
-def add_to_cast(): 
-    cj = cookielib.CookieJar();
-    opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj));
-    urllib2.install_opener(opener);
-    urllib2.urlopen("http://211.87.234.178"); 
-    urllib2.urlopen("211.87.234.178/index.php?route=product/product&product_id=43")
-    data = {'quantity':'1', 'product_id':'43'}
-    post("http://211.87.234.178/index.php?route=checkout/cart/add",data)
-    
-    
+  
 def get_url_param(path):
     #正则处理url和param并分别存储在两个list中
     file_object = open(path)
-    url_list=[]
-    param_list=[]
     for line in file_object:
+        #line是整个http请求的所有内容
         url=param=""
         if(re.findall(r'label=\".*\"]',line).__str__()<>'[]'):
-            url=re.findall(r'label=\".*\"]',line).__str__()[10:-4]
+            #url是中括号内的内容
+            p = re.compile(r'(?<=label=\"\s).*(?=\"])')
+            for m in p.finditer(line):
+                url=m.group()
             url=url.replace('\\r','')
-        param=re.findall(r'\'([^\']*)\'([^\']*)$', line)
-        if (param.__str__().find('=')>0) :
-            param=param.__str__()[3:-13]
+            #param=re.findall(r'\'([^\']*)\'([^\']*)$', line)
+            p = re.compile(r'\'([^\']*)\'([^\']*)$')
+            tem_para=""
+            for m in p.finditer(line):
+                tem_para=m.group()
+            p = re.compile(r'(?<=\').*(?=\')')
+            for m in p.finditer(tem_para):
+                param = m.group()     
+        if (param.__str__().find('=')>0):
             url_list.append(url)
             param_list.append(param)
         else:
@@ -72,6 +80,22 @@ def get_url_param(path):
                 url_list.append(url)
                 param_list.append("")
     return url_list,param_list
+
+def auto_visiter():
+    data={}  
+    get_url_param("addtocart.dot")
+    num=0
+    cj = cookielib.CookieJar();
+    opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj));
+    urllib2.install_opener(opener);
+    #按照图文件的顺序访问再访问一遍
+    while(len(param_list)>num):
+        if(param_list[num]==""):#get
+            urllib2.urlopen("http://"+url_list[num].__str__())
+        else:#post
+            data=get_post_data(param_list[num])
+            print post("http://"+url_list[num].__str__(),data)
+        num=num+1
 
 if __name__ == '__main__':
     guide=getconfigRoute()
