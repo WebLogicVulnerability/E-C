@@ -33,9 +33,9 @@ def add_to_cast():
     post("http://211.87.234.178/index.php?route=checkout/cart/add",data)
     
     
-def geturl_param():
+def get_url_param(path):
     #正则处理url和param并分别存储在两个list中
-    file_object = open('addtocart.dot')
+    file_object = open(path)
     url_list=[]
     param_list=[]
     for line in file_object:
@@ -52,6 +52,7 @@ def geturl_param():
             if(url<>""):
                 url_list.append(url)
                 param_list.append("")
+    return url_list,param_list
 
 if __name__ == '__main__':
     guide=getconfigRoute()
