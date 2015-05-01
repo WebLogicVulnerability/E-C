@@ -23,6 +23,25 @@ def getconfigRoute():
     route=currentRoute[:-4]+"\conf\config.txt"
     return route
 
+def get_post_data(param_list_element):
+    p=param_list_element
+    data={}
+    while(len(p)>1):
+        s=0
+        e=p.find("&")
+        if(e>0):
+            tem=p[s:e]
+            s=e+1
+            p=p[s:]
+            e1=tem.find("=")
+            s1=0
+            name=tem[s1:e1]
+            value=tem[e1+1:]
+            data[name]=value
+        else:
+            break
+    return data
+
 def add_to_cast(): 
     cj = cookielib.CookieJar();
     opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj));
