@@ -32,23 +32,26 @@ def add_to_cast():
     data = {'quantity':'1', 'product_id':'43'}
     post("http://211.87.234.178/index.php?route=checkout/cart/add",data)
     
+    
 def geturl_param():
+    #正则处理url和param并分别存储在两个list中
     file_object = open('addtocart.dot')
-    #顺序不对
+    url_list=[]
+    param_list=[]
     for line in file_object:
-        if (re.findall(r'label=\".*\"]',line).__str__()<>'[]'):
-            url=re.findall(r'label=\".*\"]',line).__str__()[10:-4] 
-#     url_param={}
-#     s="label"
-#     e="]"
-#     for line in file_object:
-#         m=line.find(s)
-#         n=line.find(e)
-#         if (m>0):
-#             url=line[m+8:n-1]
-#             param=line[n+6:-3]
-#             url_param[url]=param
-#     for item in url_param.items():print item
+        url=param=""
+        if(re.findall(r'label=\".*\"]',line).__str__()<>'[]'):
+            url=re.findall(r'label=\".*\"]',line).__str__()[10:-4]
+            url=url.replace('\\r','')
+        param=re.findall(r'\'([^\']*)\'([^\']*)$', line)
+        if (param.__str__().find('=')>0) :
+            param=param.__str__()[3:-13]
+            url_list.append(url)
+            param_list.append(param)
+        else:
+            if(url<>""):
+                url_list.append(url)
+                param_list.append("")
 
 if __name__ == '__main__':
     guide=getconfigRoute()
