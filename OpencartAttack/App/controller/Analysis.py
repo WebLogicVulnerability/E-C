@@ -32,26 +32,20 @@ def get_post_data(param_list_element):
     data={}
     while(len(p)>1):
         s=0
-        e=p.find("&")
+        e=p.find("^_^")
         if(e>0):
             tem=p[s:e]
-            s=e+1
+            s=e+3
             p=p[s:]
-            e1=tem.find("=")
+            e1=tem.find("$_$")
             s1=0
             name=tem[s1:e1]
-            value=tem[e1+1:]
-            data[name]=value
-            if(p.find("&")<0):#最后一个参数
-                e1=p.find("=")
-                s1=0
-                name=p[s1:e1]
-                value=p[e1+1:]
-                data[name]=value       
+            value=tem[e1+3:]
+            data[name]=value      
         else:
             break
     return data
-  
+
 def get_url_param(path):
     #正则处理url和param并分别存储在两个list中
     file_object = open(path)
@@ -64,15 +58,10 @@ def get_url_param(path):
             for m in p.finditer(line):
                 url=m.group()
             url=url.replace('\\r','')
-            #param=re.findall(r'\'([^\']*)\'([^\']*)$', line)
-            p = re.compile(r'\'([^\']*)\'([^\']*)$')
-            tem_para=""
+            p = re.compile(r'(?<=//).*')
             for m in p.finditer(line):
-                tem_para=m.group()
-            p = re.compile(r'(?<=\').*(?=\')')
-            for m in p.finditer(tem_para):
-                param = m.group()     
-        if (param.__str__().find('=')>0):
+                param = m.group()
+        if (param.__str__().find('$_$')>0):
             url_list.append(url)
             param_list.append(param)
         else:
@@ -82,8 +71,8 @@ def get_url_param(path):
     return url_list,param_list
 
 def auto_visiter():
-    data={}  
-    get_url_param("addtocart.dot")
+    data={}
+    get_url_param("Graph1.dot")
     num=0
     cj = cookielib.CookieJar();
     opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj));
