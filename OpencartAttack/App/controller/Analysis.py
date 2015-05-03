@@ -12,14 +12,16 @@ import re
 url_list=[]
 param_list=[]
 
-def post(url, data):  
-    #http post方法
-    req = urllib2.Request(url)  
+def get(url,opener):
+    resp = opener.open("http://"+url);   
+    return resp
+
+def post(url, data,opener):  
+    url="https://"+url
     data = urllib.urlencode(data)  
-    #enable cookie  
-    opener = urllib2.build_opener(urllib2.HTTPCookieProcessor())  
-    response = opener.open(req, data)  
-    return response.read()
+    req=urllib2.Request(url,data)
+    response = opener.open(req)  
+    return response
 
 def getconfigRoute():
     currentRoute=os.path.dirname(os.path.dirname(__file__))  
@@ -71,19 +73,35 @@ def get_url_param(path):
     return url_list,param_list
 
 def auto_visiter():
-    data={}
-    get_url_param("Graph1.dot")
+    data={}  
+    get_url_param("Graph3.dot")
     num=0
     cj = cookielib.CookieJar();
     opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj));
     urllib2.install_opener(opener);
+    response=urllib2.urlopen("http://211.87.234.178")
+    cook=cj._cookies
+    print "cook",cook
+    test_string="asdf"
     #按照图文件的顺序访问再访问一遍
     while(len(param_list)>num):
         if(param_list[num]==""):#get
-            urllib2.urlopen("http://"+url_list[num].__str__())
+            response=get(url_list[num].__str__(),opener)
+            print "get_url",url_list[num]
+            if response.__class__==test_string.__class__:
+                print response
+            else:
+                print response.read()
         else:#post
             data=get_post_data(param_list[num])
-            print post("http://"+url_list[num].__str__(),data)
+            print "data",data
+            print "post_url",url_list[num]
+            response=post(url_list[num].__str__(),data,opener)
+
+            if response.__class__==test_string.__class__:
+                print response
+            else:
+                print response.read()
         num=num+1
 
 if __name__ == '__main__':
