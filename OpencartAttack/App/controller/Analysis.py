@@ -104,6 +104,9 @@ def auto_visiter():
                 print response.read()
         num=num+1
 
+def unquote_URL(path):
+    return urllib.unquote(path)
+
 if __name__ == '__main__':
     guide=getconfigRoute()
     conf=open(guide,'r')
