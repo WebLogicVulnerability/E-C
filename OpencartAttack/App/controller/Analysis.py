@@ -86,6 +86,9 @@ def auto_visiter():
             print post("http://"+url_list[num].__str__(),data)
         num=num+1
 
+def unquote_URL(path):
+    return urllib.unquote(path)
+
 if __name__ == '__main__':
     guide=getconfigRoute()
     conf=open(guide,'r')
