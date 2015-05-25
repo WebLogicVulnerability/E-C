@@ -74,7 +74,7 @@ def get_url_param(path):
 
 def auto_visiter():
     data={}  
-    get_url_param("Graph3.dot")
+    get_url_param("G://Graph4.dot")
     num=0
     cj = cookielib.CookieJar();
     opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj));
@@ -111,4 +111,6 @@ if __name__ == '__main__':
     guide=getconfigRoute()
     conf=open(guide,'r')
     words=conf.read();
-    print words
+    #print words
+    auto_visiter()
+
