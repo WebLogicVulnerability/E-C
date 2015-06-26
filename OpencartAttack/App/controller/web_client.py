@@ -27,6 +27,11 @@ def post(url, data,opener):
     response = opener.open(req)  
     return response
 
+def get_current_route():
+    currentRoute=os.path.dirname(os.path.dirname(__file__))  
+    route=currentRoute[:-4]
+    return route
+
 def getconfigRoute():
     currentRoute=os.path.dirname(os.path.dirname(__file__))  
     route=currentRoute[:-4]+"\conf\config.txt"
@@ -80,7 +85,7 @@ def test_session():
     
     def session1():
         print 'session1'
-        get_url_param("G://Graph4.dot")
+        get_url_param(get_current_route()+"\Graph4.dot")
         num=0
         cj = cookielib.CookieJar();
         opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj));
@@ -101,7 +106,7 @@ def test_session():
     
     def session2(session):
         print 'session2'
-        get_url_param("G://Graph4.dot")
+        get_url_param(get_current_route()+"\Graph4.dot")
         num=0
         cj = cookielib.CookieJar();
         opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj));
@@ -134,7 +139,7 @@ def test_session():
 
 def auto_visiter():
     data={}  
-    get_url_param("G://Graph4.dot")
+    get_url_param(get_current_route()+"\Graph4.dot")
     num=0
     cj = cookielib.CookieJar();
     opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj));
