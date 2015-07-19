@@ -1,19 +1,20 @@
+#coding:utf-8
 '''
-Created on 2015Äê7ÔÂ19ÈÕ
+Created on 2015ï¿½ï¿½7ï¿½ï¿½19ï¿½ï¿½
 
 @author: Administrator
 '''
 import re
 from App.controller.data import url_list,param_list
 
-def get_url_param(path):
-    #ÕıÔò´¦ÀíurlºÍparam²¢·Ö±ğ´æ´¢ÔÚÁ½¸ölistÖĞ
+def analyze_workflow(path):
+    #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½urlï¿½ï¿½paramï¿½ï¿½ï¿½Ö±ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½listï¿½ï¿½
     file_object = open(path)
     for line in file_object:
-        #lineÊÇÕû¸öhttpÇëÇóµÄËùÓĞÄÚÈİ
+        #lineï¿½ï¿½ï¿½ï¿½ï¿½httpï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         url=param=""
         if(re.findall(r'label=\".*\"]',line).__str__()<>'[]'):
-            #urlÊÇÖĞÀ¨ºÅÄÚµÄÄÚÈİ
+            #urlï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
             p = re.compile(r'(?<=label=\"\s).*(?=\"])')
             for m in p.finditer(line):
                 url=m.group()
@@ -31,7 +32,7 @@ def get_url_param(path):
     return url_list,param_list
 
 def get_post_data(param_list_element):
-    #»ñµÃparam_listÖĞÔªËØµÄÖµ£¬´æ´¢ÔÚ×ÖµäÖĞ²¢·µ»Ø
+    #ï¿½ï¿½ï¿½param_listï¿½ï¿½Ôªï¿½Øµï¿½Öµï¿½ï¿½ï¿½æ´¢ï¿½ï¿½ï¿½Öµï¿½ï¿½Ğ²ï¿½ï¿½ï¿½ï¿½ï¿½
     p=param_list_element
     data={}
     while(len(p)>1):

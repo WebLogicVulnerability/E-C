@@ -1,6 +1,6 @@
 #coding:utf-8
 '''
-Created on 2015年5月26日
+Created on 2015锟斤拷5锟斤拷26锟斤拷
 
 @author: Administrator
 '''
@@ -8,3 +8,6 @@ Created on 2015年5月26日
 url_list=[]
 #store post params got from .dot document
 param_list=[]
+#the parameter needs to be changed
+num=['quantity']
+price=['amount,amount2']
