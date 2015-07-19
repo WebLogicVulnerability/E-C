@@ -1,4 +1,0 @@
-price
-count
-id
-name
