@@ -1,0 +1,20 @@
+digraph shili1{
+p0 -> p1 [label=" 211.87.234.178/"];
+p1 -> p2 [style="dashed",label=" 211.87.234.178/index.php?route=checkout/cart/add"];//route$_$checkout/cart/add^_^product_id$_$43^_^quantity$_$1^_^
+
+p2 -> p3 [label=" 211.87.234.178/index.php?route=common/cart/info"];
+p3 -> p4 [label=" 211.87.234.178/index.php?route=checkout/checkout"];
+p4 -> p5 [label=" 211.87.234.178/index.php?route=checkout/login"];
+p5 -> p6 [label=" 211.87.234.178/index.php?route=checkout/guest"];
+p6 -> p7 [label=" 211.87.234.178/index.php?route=checkout/checkout/customfield&customer_group_id=1"];
+p7 -> p8 [label=" 211.87.234.178/index.php?route=checkout/checkout/country&country_id=222"];
+p8 -> p9 [style="dashed",label=" 211.87.234.178/index.php?route=checkout/guest/save"];//route$_$checkout/guest/save^_^customer_group_id$_$1^_^firstname$_$y_^_^lastname$_$hp_^_^email$_$111@111.com^_^telephone$_$13000000000^_^fax$_$^_^company$_$^_^address_1$_$address1__^_^address_2$_$^_^city$_$jinan^_^postcode$_$250000^_^country_id$_$222^_^zone_id$_$3521^_^
+
+p9 -> p10 [label=" 211.87.234.178/index.php?route=checkout/payment_method"];
+p10 -> p11 [style="dashed",label=" 211.87.234.178/index.php?route=checkout/payment_method/save"];//route$_$checkout/payment_method/save^_^payment_method$_$pp_standard^_^comment$_$^_^agree$_$1^_^
+
+p11 -> p12 [label=" 211.87.234.178/index.php?route=checkout/confirm"];
+p12 -> p13 [style="dashed",label=" www.sandbox.paypal.com/cgi-bin/webscr"];//cmd$_$_cart^_^upload$_$1^_^business$_$936577895-facilitator@qq.com^_^item_name_1$_$MacBook^_^item_number_1$_$Product+16^_^amount_1$_$500.00^_^quantity_1$_$1^_^weight_1$_$0^_^item_name_2$_$Shipping%2C+Handling%2C+Discounts+%26+Taxes^_^item_number_2$_$^_^amount_2$_$102.00^_^quantity_2$_$1^_^weight_2$_$0^_^currency_code$_$USD^_^first_name$_$y_^_^last_name$_$hp_^_^address1$_$address1__^_^address2$_$^_^city$_$jinan^_^zip$_$250000^_^country$_$GB^_^address_override$_$0^_^email$_$111@111.com^_^invoice$_$45+-+y_+hp_^_^lc$_$en^_^rm$_$2^_^no_note$_$1^_^no_shipping$_$1^_^charset$_$utf-8^_^return$_$http%3A%2F%2F211.87.234.178%2Findex.php%3Froute%3Dcheckout%2Fsuccess^_^notify_url$_$http%3A%2F%2F211.87.234.178%2Findex.php%3Froute%3Dpayment%2Fpp_standard%2Fcallback^_^cancel_return$_$http%3A%2F%2F211.87.234.178%2Findex.php%3Froute%3Dcheckout%2Fcheckout^_^paymentaction$_$authorization^_^custom$_$45^_^bn$_$OpenCart_2.0_WPS^_^
+
+
+}
