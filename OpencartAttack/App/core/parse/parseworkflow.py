@@ -5,7 +5,8 @@ Created on 2015��7��19��
 @author: Administrator
 '''
 import re
-from App.controller.data import url_list,param_list
+from App.controller.data import url_list,param_list, url_set,data_set
+from copy import deepcopy
 
 def analyze_workflow(path):
     #������url��param���ֱ�洢������list��
@@ -29,24 +30,7 @@ def analyze_workflow(path):
             if(url<>""):
                 url_list.append(url)
                 param_list.append("")
-    return url_list,param_list
+        url_set=deepcopy(url_list)
+        data_set=deepcopy(param_list)
+    return url_list,param_list,url_set,data_set
 
-def get_post_data(param_list_element):
-    #���param_list��Ԫ�ص�ֵ���洢���ֵ��в�����
-    p=param_list_element
-    data={}
-    while(len(p)>1):
-        s=0
-        e=p.find("^_^")
-        if(e>0):
-            tem=p[s:e]
-            s=e+3
-            p=p[s:]
-            e1=tem.find("$_$")
-            s1=0
-            name=tem[s1:e1]
-            value=tem[e1+3:]
-            data[name]=value      
-        else:
-            break
-    return data

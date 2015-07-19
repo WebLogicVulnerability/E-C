@@ -8,6 +8,10 @@ Created on 2015��5��26��
 url_list=[]
 #store post params got from .dot document
 param_list=[]
+#url used to testing vul
+url_set=[]
+#data used to testing vul
+data_set=[]
 #the parameter needs to be changed
 num=['quantity']
-price=['amount,amount2']
+price=['amount_1','Amount2']

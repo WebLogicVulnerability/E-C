@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
+encoding//App/controller/__init__.py=utf-8
 encoding//App/controller/action.py=utf-8
 encoding//App/controller/data.py=utf-8
+encoding//App/controller/test_post.py=utf-8
 encoding//App/controller/web_client.py=utf-8
 encoding//App/core/parse/parseroute.py=utf-8
 encoding//App/core/parse/parseworkflow.py=utf-8

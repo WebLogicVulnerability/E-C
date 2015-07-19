@@ -11,10 +11,11 @@ import urllib
 import urllib2
 import cookielib
 import ssl
-from data import url_list
+from data import url_list,url_set,data_set
 from data import param_list
-from App.core.parse.parseworkflow import analyze_workflow,get_post_data
+from App.core.parse.parseworkflow import analyze_workflow
 from App.core.parse.parseroute import get_config_route,get_current_route
+
 
 def get(url,opener):
     resp = opener.open("http://"+url);   
@@ -156,6 +157,65 @@ def exe_the_same_workflow():
                 print response.read()
         num=num+1
 
+
+def get_post_data(param_list_element):
+    #���param_list��Ԫ�ص�ֵ���洢���ֵ��в�����
+    p=param_list_element
+    data={}
+    while(len(p)>1):
+        s=0
+        e=p.find("^_^")
+        if(e>0):
+            tem=p[s:e]
+            s=e+3
+            p=p[s:]
+            e1=tem.find("$_$")
+            s1=0
+            name=tem[s1:e1]
+            value=tem[e1+3:]
+            data[name]=value      
+        else:
+            break
+    return data
+
+def test_simple():
+    #按照图文件的顺序访问再访问一遍
+    #解决https打开失败错误
+    url_set=url_list
+    ssl._create_default_https_context = ssl._create_unverified_context
+    data={}  
+    num=0
+    i=0
+    cj = cookielib.CookieJar();
+    opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj));
+    urllib2.install_opener(opener);
+    response=urllib2.urlopen("http://211.87.234.178")
+    test_string="string"
+    print '!!!!!!!!!!!!!'
+    print url_set
+    print data_set 
+    print '!!!!!!!!!!!!!'
+
+    while(len(data_set)>num):
+        print i+1
+        if(data_set[num]==""):         #get
+            response=get(url_set[num].__str__(),opener)
+#             print "get_url",url_list[num]
+#             if response.__class__==test_string.__class__:
+#                 print response
+#             else:
+#                 print response.read()
+        else:                          #post
+            data=get_post_data(data_set[num])
+#             print "data",data
+#             print "post_url",url_list[num]
+            response=post(url_set[num].__str__(),data,opener)
+
+            if response.__class__==test_string.__class__:
+                print response
+            else:
+                print response.read()
+        num=num+1
 
 
 
