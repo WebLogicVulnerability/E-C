@@ -5,7 +5,7 @@ Created on 2015��7��19��
 @author: Administrator
 '''
 import re
-from App.controller.data import url_list,param_list, url_set,data_set
+from App.controller.data import url_list,param_list
 from copy import deepcopy
 
 def analyze_workflow(path):
@@ -30,7 +30,5 @@ def analyze_workflow(path):
             if(url<>""):
                 url_list.append(url)
                 param_list.append("")
-        url_set=deepcopy(url_list)
-        data_set=deepcopy(param_list)
-    return url_list,param_list,url_set,data_set
+    return url_list,param_list
 

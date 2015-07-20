@@ -178,10 +178,9 @@ def get_post_data(param_list_element):
             break
     return data
 
-def test_simple():
+def test_simple(url_set,data_set):
     #按照图文件的顺序访问再访问一遍
     #解决https打开失败错误
-    url_set=url_list
     ssl._create_default_https_context = ssl._create_unverified_context
     data={}  
     num=0
@@ -191,10 +190,6 @@ def test_simple():
     urllib2.install_opener(opener);
     response=urllib2.urlopen("http://211.87.234.178")
     test_string="string"
-    print '!!!!!!!!!!!!!'
-    print url_set
-    print data_set 
-    print '!!!!!!!!!!!!!'
 
     while(len(data_set)>num):
         print i+1

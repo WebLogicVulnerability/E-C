@@ -14,4 +14,7 @@ url_set=[]
 data_set=[]
 #the parameter needs to be changed
 num=['quantity']
+#single
 price=['amount_1','Amount2']
+#toal
+t_price=[]
