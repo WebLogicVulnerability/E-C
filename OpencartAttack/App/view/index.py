@@ -43,7 +43,7 @@ class Index(object):
         self.text=Text()
         for i in range(1,10):
             self.text.insert(1.0,'hello\n')
-        self.text.grid(row=2    )
+        self.text.grid(row=2)
 
         self.textInput=Button(self.top,
                               text="文本框的输入",
