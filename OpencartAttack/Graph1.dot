@@ -1,0 +1,7 @@
+digraph shili1{
+p0 -> p1 [label=" 211.87.234.16/"];
+p1 -> p2 [label=" 211.87.234.16/index.php?route=account/login"];
+p2 -> p3 [style="dashed",label=" 211.87.234.16/index.php?route=account/login"];//route$_$account/login^_^email$_$admin@admin.com^_^password$_$admin^_^
+
+p3 -> p4 [label=" 211.87.234.16/index.php?route=account/account"];
+}

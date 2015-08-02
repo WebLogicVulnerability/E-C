@@ -9,13 +9,10 @@ from App.controller.data import url_list,param_list
 from copy import deepcopy
 
 def analyze_workflow(path):
-    #������url��param���ֱ�洢������list��
     file_object = open(path)
     for line in file_object:
-        #line�����http�������������
         url=param=""
         if(re.findall(r'label=\".*\"]',line).__str__()<>'[]'):
-            #url���������ڵ�����
             p = re.compile(r'(?<=label=\"\s).*(?=\"])')
             for m in p.finditer(line):
                 url=m.group()
