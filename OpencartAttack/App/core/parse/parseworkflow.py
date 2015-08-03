@@ -27,5 +27,6 @@ def analyze_workflow(path):
             if(url<>""):
                 url_list.append(url)
                 param_list.append("")
+    print url_list
     return url_list,param_list
 

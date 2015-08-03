@@ -13,6 +13,8 @@ from App.controller.__init__ import initialize
 if __name__ == '__main__':
     #initialize()
     analyze_workflow(get_current_route()+'Graph4.dot')
+    print get_current_route()
+    print 'analyse done'
     exe_the_same_workflow()
     
     #changeprice()

@@ -50,7 +50,7 @@ def test_session():
         print 'session1 end'
         #thread.exit_thread()  
         print 'session1 end2'
-        return cook.get('211.87.234.178').get('/').get('PHPSESSID')
+        return cook.get('211.87.234.16').get('/').get('PHPSESSID')
     
     def session2(session):
         print 'session2'
@@ -59,7 +59,7 @@ def test_session():
         cj = cookielib.CookieJar();
         opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj));
         urllib2.install_opener(opener);
-        urllib2.urlopen("http://211.87.234.178")
+        urllib2.urlopen("http://211.87.234.16")
     
         cook=cj._cookies
     #cookie structure ([domain[, path[, name]]])
@@ -134,17 +134,18 @@ def exe_the_same_workflow():
     cj = cookielib.CookieJar();
     opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj));
     urllib2.install_opener(opener);
-    response=urllib2.urlopen("http://211.87.234.178")
+    response=urllib2.urlopen("http://211.87.234.16")
     test_string="string"
     while(len(param_list)>num):
-        print i+1
+        print 'exe ',i+1
         if(param_list[num]==""):#get
+            #print "get_url",url_list[num]
             response=get(url_list[num].__str__(),opener)
-#             print "get_url",url_list[num]
-#             if response.__class__==test_string.__class__:
-#                 print response
-#             else:
-#                 print response.read()
+            #print "get_url",url_list[num]
+            if response.__class__==test_string.__class__:
+                 print response
+            else:
+                 print response.read()
         else:#post
             data=get_post_data(param_list[num])
 #             print "data",data

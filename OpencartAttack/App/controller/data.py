@@ -18,3 +18,5 @@ num=['quantity']
 price=['amount_1','Amount2']
 #toal
 t_price=[]
+#session
+session=['PHPSESSIONID']
