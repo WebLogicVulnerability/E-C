@@ -1,4 +1,4 @@
-#coding:utf-8
+#-*-coding:utf-8-*
 '''
 Created on 2015��5��25��
 
@@ -16,9 +16,14 @@ from data import param_list
 from App.core.parse.parseworkflow import analyze_workflow
 from App.core.parse.parseroute import get_config_route,get_current_route
 
+_error=['error','exception','warning']
+
 
 def get(url,opener):
-    resp = opener.open("http://"+url);   
+    resp = opener.open("http://"+url);  
+    if resp.code[0]=='4' or '5':
+        print 'url error'
+        exit
     return resp
 
 def post(url, data,opener):  
@@ -26,6 +31,9 @@ def post(url, data,opener):
     data = urllib.urlencode(data)  
     req=urllib2.Request(url,data)
     response = opener.open(req)
+    if response.code[0]=='4' or '5':
+        print 'url error'
+        exit
     return response
 
 
@@ -134,10 +142,9 @@ def exe_the_same_workflow():
     cj = cookielib.CookieJar();
     opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj));
     urllib2.install_opener(opener);
-    response=urllib2.urlopen("http://211.87.234.16")
+    response=urllib2.urlopen("https://www.baidu.com")
     test_string="string"
     while(len(param_list)>num):
-        print 'exe ',i+1
         if(param_list[num]==""):#get
             #print "get_url",url_list[num]
             response=get(url_list[num].__str__(),opener)
@@ -157,6 +164,48 @@ def exe_the_same_workflow():
             else:
                 print response.read()
         num=num+1
+
+def check_the_workflow():
+    #按照图文件的顺序访问再访问一遍,尝试寻找其中的错误
+    ssl._create_default_https_context = ssl._create_unverified_context
+    data={}  
+    num=0
+    i=0
+    cj = cookielib.CookieJar();
+    opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj));
+    urllib2.install_opener(opener);
+    response=urllib2.urlopen("https://www.baidu.com")
+    test_string="string"
+    while(len(param_list)>num):
+        if(param_list[num]==""):#get
+            #print "get_url",url_list[num]
+            response=get(url_list[num].__str__(),opener)
+            #print "get_url",url_list[num]
+            if response.__class__==test_string.__class__:
+                if check_error(response) == True:
+                    print 'there is an error in wokrflow'
+            else:
+                if check_error(response.read())==True:
+                    print 'there is an error in wokrflow'
+        else:#post
+            data=get_post_data(param_list[num])
+#             print "data",data
+#             print "post_url",url_list[num]
+            response=post(url_list[num].__str__(),data,opener)
+
+            if response.__class__==test_string.__class__:
+                if check_error(response) == True:
+                    print 'there is an error in wokrflow'
+            else:
+                if check_error(response.read())==True:
+                    print 'there is an error in wokrflow'
+        num=num+1
+        
+def check_error(html):
+    for items in _error:
+        if items in html:
+            return True
+    return False
 
 
 def get_post_data(param_list_element):

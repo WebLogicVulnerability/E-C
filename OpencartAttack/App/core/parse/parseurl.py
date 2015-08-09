@@ -1,7 +1,7 @@
-#coding:utf-8
+#-*-coding:utf-8-*
 
 '''
-Created on 2015Äê7ÔÂ19ÈÕ
+Created on 2015ï¿½ï¿½7ï¿½ï¿½19ï¿½ï¿½
 
 @author: Administrator
 '''

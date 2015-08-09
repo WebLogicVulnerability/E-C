@@ -1,4 +1,4 @@
-#coding:utf-8
+#-*-coding:utf-8-*
 '''
 Created on 2015��5��26��
 
@@ -20,3 +20,5 @@ price=['amount_1','Amount2']
 t_price=[]
 #session
 session=['PHPSESSIONID']
+#current path
+PATH=''

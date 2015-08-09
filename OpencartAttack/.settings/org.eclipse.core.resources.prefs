@@ -12,4 +12,5 @@ encoding//App/core/pattern/__init__.py=utf-8
 encoding//App/core/pattern/attack.py=utf-8
 encoding//App/core/pattern/bypasspay.py=utf-8
 encoding//App/core/pattern/switchsession.py=utf-8
+encoding//App/initialize.py=utf-8
 encoding//App/view/index.py=utf-8
