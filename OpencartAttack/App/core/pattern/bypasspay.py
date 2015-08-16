@@ -4,7 +4,7 @@ Created on 2015��8��2��
 
 @author: Administrator
 '''
-from App.controller.data import url_list,param_list
+from App.controller.data import url_list,param_list,pay_page,order_placed_page
 from App.core.parse import parseurl
 from copy import deepcopy
 from App.controller.web_client import post
@@ -17,7 +17,7 @@ def judge():
     while (urllist):
         next=urllist.pop()
         if current != next:
-            epay=next
+            pay_page=next
             current=next
             break
         else:
@@ -25,11 +25,10 @@ def judge():
     while (urllist):
         next=urllist.pop()
         if current != next:
-            ec=next
+            order_placed_page=next
             break
         else:
             current=next
-    return epay,ec
 def find_data():
     count=0
     for url in url_list:
@@ -38,12 +37,9 @@ def find_data():
     return count
 def bypasspay():
     ssl._create_default_https_context = ssl._create_unverified_context
-    data={}  
-    num=0
-    i=0
     cj = cookielib.CookieJar();
     opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj));
     urllib2.install_opener(opener);
     count=find_data()
-    response=post(url_list[count],param_list[count],opener)  
+    html=post(url_list[count],param_list[count],opener)  
     #check similarity  

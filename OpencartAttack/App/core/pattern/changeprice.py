@@ -7,15 +7,14 @@ Created on 2015年7月25日
 '''
 from App.controller.web_client import test_simple
 from App.controller.data import param_list,price,url_list
+from App.core.pattern.attack import set_data
 from copy import deepcopy
-from attack import set_data
+
 def check_change_price():
     pass
 def changeprice():
     #遍历实际请求中的参数是否在攻击参数集合内
     data_set=deepcopy(param_list)
-    print param_list
-    print data_set
     flag=False
     for pri in price:
         #print 'pri',pri
@@ -31,5 +30,8 @@ def changeprice():
         print 'it seems that we don\'t have that price parameter in our knowledge base'
     else:
         print 'testing change price'
-        test_simple(url_list,data_set)
+        print url_list
+        print data_set
+        html=test_simple(url_list,data_set)
+
     

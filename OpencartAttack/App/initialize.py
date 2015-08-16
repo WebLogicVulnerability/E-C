@@ -3,7 +3,8 @@ from App.controller.data import PATH
 from App.core.parse.parseroute import get_current_route
 from App.core.parse.parseworkflow import analyze_workflow
 from App.controller.graph_generator import generate_graph
-from App.controller.web_client import exe_the_same_workflow
+from App.controller.web_client import check_the_workflow
+from App.core.pattern.bypasspay import judge
 
 
 import os
@@ -17,8 +18,8 @@ def check_dot_file():
 def try_workflow():
     print 'try workflow'
     analyze_workflow(get_current_route()+'Graph.dot')
-    exe_the_same_workflow()
-
+    check_the_workflow()
+    judge()
 def _initialize():
     print 'initialize......'
     PATH= get_current_route()
@@ -32,7 +33,9 @@ def _initialize():
         exit
     print 'trying to generate graph......'
     generate_graph(trace_path)
+    print 'graph generated'
     check_dot_file()
     try_workflow()
+    print 'workflow can be exe rightly'
     
     

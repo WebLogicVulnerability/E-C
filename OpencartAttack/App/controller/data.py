@@ -8,6 +8,8 @@ Created on 2015��5��26��
 url_list=[]
 #store post params got from .dot document
 param_list=[]
+#store cookie
+cookie=''
 #url used to testing vul
 url_set=[]
 #data used to testing vul
@@ -22,3 +24,12 @@ t_price=[]
 session=['PHPSESSIONID']
 #current path
 PATH=''
+#order_placed_page
+order_placed_page=''
+#Sid
+sid=[]
+#pay_page
+pay_page=''
+#order_placed_page
+order_placed_page=''
+

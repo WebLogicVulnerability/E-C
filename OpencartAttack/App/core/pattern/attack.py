@@ -5,10 +5,11 @@ Created on 2015��7��19��
 @author: Administrator
 '''
 from App.controller.web_client import test_simple
-from App.controller.data import param_list,price,num,data_set, url_list
+from App.controller.data import param_list,price,num,data_set, url_list,order_placed_page,sid,t_price,cookie,session
 from copy import deepcopy
+from App.controller.web_client import get_all_data
 
-
+check={'bp':'n','cp':'n','ma':'n','po':'n','sse':'n','ss':'n'}
 
 
 def set_data(data_set,p_name,p_value):
@@ -37,10 +38,44 @@ def set_data(data_set,p_name,p_value):
 
 
 
-# three kinds of simple vulnerability####################################################
-
-   
-
+def set_vul():
     
-#############################################################################################    
+    if order_placed_page:
+        check.update('bp', 'y')
+    params = get_all_data()
+    for param in params:
+        #print 'current_param',param
+        if param in price:
+            check['cp']= 'y'
+        elif param in num:
+            check['ma']= 'y'
+        elif param in t_price:
+            check['po']= 'y'
+        elif param in sid:
+            check['ss']= 'y'
+            
+    #check switch session
+    for s in session:
+        if s in cookie:
+            check['sse']= 'y'
+    #check bypass pay
+    #if oder placed page exists 
     
+    print 'folowing attack is going to be detected'
+    for option in check:
+        if check[option]=='y':
+            if option == 'cp':
+                print 'change price'
+            elif option == 'ma':
+                print 'minus amount'
+            elif option == 'po':
+                print 'price overflow'
+            elif option == 'ss':
+                print 'switch sid'
+            elif option == 'sse':
+                print 'switch session'
+            elif option == 'bp':
+                print 'bypass payment'
+    return check
+
+

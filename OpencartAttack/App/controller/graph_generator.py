@@ -48,7 +48,7 @@ def generate_graph(trace_path):
             if  node['GET_or_POST']=='p':  
                 node['post_data']=''
             if "$_$" in line:
-                    print 'post_data_line',line
+                    #print 'post_data_line',line
                     node['post_data']=line
         else: 
             pass
@@ -91,15 +91,15 @@ def generate_graph(trace_path):
         if nodes[nodes_num]["GET_or_POST"]=='p':
             graph.write('"];'+'//')
             graph.write(nodes[nodes_num]["post_data"])
-            print 'post data',nodes[nodes_num]["post_data"]
+            #print 'post data',nodes[nodes_num]["post_data"]
         
         else:
             graph.write('"];')
         
         graph.write('\n')
-        print 'nodesnumner' ,nodes_num,nodes[nodes_num]["URL"]
+        #print 'nodesnumner' ,nodes_num,nodes[nodes_num]["URL"]
     graph.write("}")
-    print 'done'
+    #print 'done'
     
     graph.close()
 

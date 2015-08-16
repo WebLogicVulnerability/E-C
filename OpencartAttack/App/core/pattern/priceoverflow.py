@@ -29,5 +29,5 @@ def priceoverflow():
         print 'it seems that we don\'t have that price parameter in our knowledge base'
     else:
         print 'testing change price'
-        test_simple(url_list,data_set)
+        html=test_simple(url_list,data_set)
     
